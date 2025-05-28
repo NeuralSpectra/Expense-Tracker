@@ -1,6 +1,4 @@
 streamlit
-supabase
-datetime
-os
 pandas
+supabase
 python-dotenv
