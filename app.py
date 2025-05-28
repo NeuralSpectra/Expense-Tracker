@@ -151,35 +151,36 @@ with st.expander("**Transaction History:**", expanded=True):
         deleted_rows = st.multiselect("Select Transactions To Delete", df["id"].tolist())
 
         if st.button("📏 Save All Changes"):
-            updated_txns = []
-            new_txns_to_add = []
-
-            for _, row in edited_df.iterrows():
-                txn_data = {
-                    "amount": float(row["amount"]),
-                    "transaction_type": row["transaction_type"],
-                    "category": row["category"],
-                    "payment_method": row["payment_method"],
-                    "description": row["description"],
-                    "date": row["date"].isoformat() if isinstance(row["date"], datetime) else str(row["date"]),
-                    "synced": True
-                }
-
-                if str(row["id"]).startswith("new_"):
-                    new_txns_to_add.append(txn_data)
-                else:
-                    txn_data["id"] = row["id"]
-                    updated_txns.append(txn_data)
-
-            bulk_update(updated_txns)
-            bulk_delete([txn_id for txn_id in deleted_rows if not str(txn_id).startswith("new_")])
-            bulk_add(new_txns_to_add)
-
-            if "new_txns" in st.session_state:
-                st.session_state.new_txns.clear()
-
-            st.success("**All Changes Saved.**")
-            st.rerun()
+            with st.spinner("**Saving All Changes...**"):
+                updated_txns = []
+                new_txns_to_add = []
+    
+                for _, row in edited_df.iterrows():
+                    txn_data = {
+                        "amount": float(row["amount"]),
+                        "transaction_type": row["transaction_type"],
+                        "category": row["category"],
+                        "payment_method": row["payment_method"],
+                        "description": row["description"],
+                        "date": row["date"].isoformat() if isinstance(row["date"], datetime) else str(row["date"]),
+                        "synced": True
+                    }
+    
+                    if str(row["id"]).startswith("new_"):
+                        new_txns_to_add.append(txn_data)
+                    else:
+                        txn_data["id"] = row["id"]
+                        updated_txns.append(txn_data)
+    
+                bulk_update(updated_txns)
+                bulk_delete([txn_id for txn_id in deleted_rows if not str(txn_id).startswith("new_")])
+                bulk_add(new_txns_to_add)
+    
+                if "new_txns" in st.session_state:
+                    st.session_state.new_txns.clear()
+    
+                st.success("**All Changes Saved.**")
+                st.rerun()
     else:
         st.info("**No Transactions Available.**")
 
