@@ -1,0 +1,6 @@
+streamlit
+supabase
+datetime
+os
+pandas
+python-dotenv
