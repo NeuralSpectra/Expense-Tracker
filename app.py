@@ -44,8 +44,8 @@ st.markdown("""
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("---")
 
-SUPABASE_URL="https://ykxoqctfdabdooorfubg.supabase.co"
-SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlreG9xY3RmZGFiZG9vb3JmdWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzNDg0MDcsImV4cCI6MjA2MzkyNDQwN30.kLCKRCL7RL8CQqk6DGddCHpW9rHysHP_TD701I41Wns"
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # --- Functions ---
