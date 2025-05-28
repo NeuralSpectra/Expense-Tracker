@@ -179,8 +179,8 @@ with st.expander("**Transaction History:**", expanded=True):
                 if "new_txns" in st.session_state:
                     st.session_state.new_txns.clear()
     
-                st.success("**All Changes Saved.**")
-                st.rerun()
+            st.success("**All Changes Saved.**")
+            st.rerun()
     else:
         st.info("**No Transactions Available.**")
 
