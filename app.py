@@ -151,7 +151,7 @@ with st.expander("**Transaction History:**", expanded=True):
         deleted_rows = st.multiselect("Select Transactions To Delete", df["id"].tolist())
 
         if st.button("📏 Save All Changes"):
-            with st.spinner("**Saving All Changes...**"):
+            with st.spinner("Saving All Changes..."):
                 updated_txns = []
                 new_txns_to_add = []
     
